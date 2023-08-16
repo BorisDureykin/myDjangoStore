@@ -1,0 +1,47 @@
+{% extends 'myStore/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+
+ <div class="text-center">
+    <h2> Product {{productSelected.name}} Information</h2>
+    </div>
+    <ul class="nav ">
+
+                 <div class="card" style="width: 18rem;">
+                      <img src="{{this.img}}" class="card-img-top" alt="No image">
+                     {% if productSelected.offerSale %}
+                        <div class="spinner-grow" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                     {% else %}
+                        <div class="spinner-grow text-light" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                     {% endif %}
+                      <div class="card-body">
+                        <h5 class="card-title">{{productSelected.name}}</h5>
+                        <p class="card-text">{{productSelected.description}}</p>
+                      </div>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Price: {{productSelected.price}} ₽</li>
+                      </ul>
+                      <div class="card-body">
+                        <ul  >
+                             <form action="/cart/{{productSelected.id}}" method="post">
+                    <input type="hidden" name="id" value="{{productSelected.id}}">
+                    <input type="hidden" name="_method" value="POST">
+                    <button type="submit" class="btn btn-outline-dark">Add to Cart</button>
+                </form>
+                    </ul>
+              </div>
+            </div>
+
+    </ul>
+
+{% endblock %}

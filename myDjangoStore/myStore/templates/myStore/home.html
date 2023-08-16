@@ -1,0 +1,43 @@
+{% extends 'myStore/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+    <h2> Products for the Promotion </h2>
+    </div>
+    <ul class="nav ">
+         {% for product in products %}
+                 <div class="card" style="width: 18rem;">
+                      <img src="{{this.img}}" class="card-img-top" alt="No image">
+                     {% if product.offerSale %}
+                        <div class="spinner-grow" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                     {% else %}
+                        <div class="spinner-grow text-light" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                     {% endif %}
+                      <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">{{product.description}}</p>
+                      </div>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Price: {{product.price}} ₽</li>
+                      </ul>
+                      <div class="card-body">
+                        <ul  >
+                            <div class="btn-group me-5">
+                                <a href="/product/{{product.id}}" class="btn btn-outline-dark">More...</a>
+                            </div>
+                    </ul>
+              </div>
+            </div>
+        {% endfor %}
+    </ul>
+{% endblock %}
